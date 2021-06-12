@@ -5,6 +5,7 @@ function TodoItem(props) {
         <div>
             <input type="checkbox" />
             <label class="strikethrough"> {props.item.text} </label>
+            <label class="dateAndTime"> {props.item.dateAndTime} </label>
         </div>
     )
 }
