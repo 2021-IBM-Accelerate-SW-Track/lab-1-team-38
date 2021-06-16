@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 export default function Todo(props) {
   return (
     <li className="todo stack-small">
-      <Grid container fullWidth='true'>
+      <Grid container fullWidth='true' spacing={1} alignItems="center">
         <Grid item>
         <Checkbox
           id={props.id}
@@ -23,7 +23,16 @@ export default function Todo(props) {
         <Typography className="todo-label" variant="h3" htmlFor={props.id}>
           {props.name}
         </Typography>
+        
         </Grid>
+
+        <Grid item justify ="center" alignItems="stretch" style={{ display: "flex" }}>
+          <Typography className="todo-timestamp" variant="h5" htmlFor={props.id}>
+          {props.timestamp}
+          </Typography> 
+          
+        </Grid>
+
         <Grid item alignItems="stretch" style={{ display: "flex" }}>
         <IconButton
           variant="contained" color="red"

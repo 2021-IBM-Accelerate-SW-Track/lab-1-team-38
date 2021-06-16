@@ -14,7 +14,6 @@ import './App.css';
 
 
 // What is left to is do:
-// - fix update in to-do array so that it is automatically displayed in the all tab 
 // - display date and time of addition
 // - no dupe items validation
 // - update list items
@@ -47,6 +46,8 @@ import { BluetoothConnectedRounded, Code, Description, Details, HelpRounded, Nea
 import todosData from './todosData';
 import { ButtonBase, ListItemSecondaryAction } from '@material-ui/core';
 import { isDOMComponentElement } from 'react-dom/test-utils';
+import uuid from 'react-uuid'
+import arrayMove from "array-move";
 
 // this when called will assign and generate the filters.  to add more filters add a label with a following conditional
 const FILTER_MAP = {
@@ -60,7 +61,6 @@ const FILTER_NAMES = Object.keys(FILTER_MAP);
 function App(props) {
   const [filter, setFilter] = useState('All');
   const [tasks, setTasks] = useState(props.tasks);
-
 
   function addTask(name) {
     //code for new task to go here, will need to call settasks() or something.
@@ -86,18 +86,25 @@ function App(props) {
   /*
   Repeated task input check here
   */
+ if(todosData.find(t => t.name === name)) {
+      return(
+        <Alert severity="error">Error: Trying to enter current task as new task</Alert>
+      );
+ }
 
   /*
   After checking if string is empty and if the task in repeated, then can push onto list
   */
-    todosData.push(
+    let newElem = (
       { 
-        id: todosData.length+1,
+        id: uuid(), 
         text: name,
         dateAndTime: new Date().toLocaleString(),
         completed: false
       }
-    ); 
+    );
+    const newToDosData = [...todosData, newElem]; 
+    setTasks(newToDosData);
   }
 
   function deleteTask(id) {
@@ -120,6 +127,7 @@ function App(props) {
     <Todo
       id={task.id}
       name={task.text}
+      timestamp={task.dateAndTime}
       completed={task.completed}
       key={task.id}
       toggleTaskCompleted={toggleTaskCompleted}
