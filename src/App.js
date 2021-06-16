@@ -14,7 +14,6 @@ import './App.css';
 
 
 // What is left to is do:
-// - fix update in to-do array so that it is automatically displayed in the all tab 
 // - display date and time of addition
 // - no dupe items validation
 // - update list items
@@ -48,6 +47,7 @@ import todosData from './todosData';
 import { ButtonBase, ListItemSecondaryAction } from '@material-ui/core';
 import { isDOMComponentElement } from 'react-dom/test-utils';
 import uuid from 'react-uuid'
+import arrayMove from "array-move";
 
 // this when called will assign and generate the filters.  to add more filters add a label with a following conditional
 const FILTER_MAP = {
@@ -85,15 +85,16 @@ function App(props) {
   /*
   After checking if string is empty and if the task in repeated, then can push onto list
   */
-    todosData.push(
+    let newElem = (
       { 
         id: uuid(), 
         text: name,
         dateAndTime: new Date().toLocaleString(),
         completed: false
       }
-    ); 
-    setTasks(todosData);
+    );
+    const newToDosData = [...todosData, newElem]; 
+    setTasks(newToDosData);
   }
 
   function deleteTask(id) {
