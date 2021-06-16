@@ -73,6 +73,16 @@ function App(props) {
       );
     }
 
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].text === name) {
+        return (
+          <Alert severity="error">
+            This task already exists. Please enter a new task.
+          </Alert>
+        )
+      }
+    }
+
   /*
   Repeated task input check here
   */
