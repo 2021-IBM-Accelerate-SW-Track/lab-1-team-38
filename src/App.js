@@ -14,9 +14,8 @@ import './App.css';
 
 
 // What is left to is do:
-// - add items to todosData array
-// - mark items as complete
-// - date and time of addition
+// - fix update in to-do array so that it is automatically displayed in the all tab 
+// - display date and time of addition
 // - no dupe items validation
 // - update list items
 // - implement the deleting of items
@@ -40,6 +39,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Alert from '@material-ui/lab/Alert';
 import Form from "./component/Form";
 import FilterButton from "./component/FilterButton";
 import Todo from "./component/Todo";
@@ -64,13 +64,44 @@ function App(props) {
 
   function addTask(name) {
     //code for new task to go here, will need to call settasks() or something.
+   /*
+    Empty string/null check for input, doesn't display error message 
+    */
+   if(name.length <= 0){
+      return(
+        <Alert severity="error">Error: Trying to enter empty string as a task</Alert>
+      );
+    }
+
+  /*
+  Repeated task input check here
+  */
+
+  /*
+  After checking if string is empty and if the task in repeated, then can push onto list
+  */
+    todosData.push(
+      { 
+        id: todosData.length+1,
+        text: name,
+        dateAndTime: new Date().toLocaleString(),
+        completed: false
+      }
+    ); 
   }
+
   function deleteTask(id) {
     //code for deleting tasks will go here, will need to call settasks() or something.
   }
 
   function toggleTaskCompleted(id) {
     //code for marking items as complete will go here, should call settasks or something.
+
+    /*
+    ranges through the todosData to find the matching id with the id to be completed;
+    if finds task, then marks as complete; else maintains the original task completion state
+    */
+    todosData.map(x => x.id == id ? x.completed = true : x.completed = x.completed);
   }
   
 
