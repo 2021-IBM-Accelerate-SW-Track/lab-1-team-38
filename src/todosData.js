@@ -1,24 +1,26 @@
+import uuid from "react-uuid"
+
 const todosData = [
     {
-        id: 1,
+        id: uuid(),
         text: "HackerRank Interview Prep Kit",
         dateAndTime: new Date().toLocaleString(),
         completed: true
     },
     {
-        id: 2,
+        id: uuid(),
         text: "“Learn DS & Algorithms” course from Programiz",
         dateAndTime: new Date().toLocaleString(),
         completed: false
     },
     {
-        id: 3,
+        id: uuid(),
         text: "Watch React Hooks video ",
         dateAndTime: new Date().toLocaleString(),
         completed: false
     },
     {
-        id: 4,
+        id: uuid(),
         text: "Watch Material UI video",
         dateAndTime: new Date().toLocaleString(),
         completed: false
