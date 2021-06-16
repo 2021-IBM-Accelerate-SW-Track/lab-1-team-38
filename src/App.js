@@ -110,6 +110,7 @@ function App(props) {
     <Todo
       id={task.id}
       name={task.text}
+      timestamp={task.dateAndTime}
       completed={task.completed}
       key={task.id}
       toggleTaskCompleted={toggleTaskCompleted}
