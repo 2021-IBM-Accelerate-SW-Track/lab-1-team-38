@@ -108,13 +108,16 @@ function App(props) {
   }
 
   function deleteTask(id) {
-    //code for deleting tasks will go here, will need to call settasks() or something.
-    for(let i = 0; i < tasks.length; i++) {
-        if (tasks[i].id == id) {
-           tasks.pop(i);
+    
+    const newToDo = [...tasks];
+
+    // Find and delete specified task
+    for (let i = 0; i < newToDo.length; i++) {
+        if (newToDo[i].id == id) {
+            newToDo.splice(i, 1);
         }
     }
-    
+    setTasks(newToDo);
   }
 
   function toggleTaskCompleted(id) {
