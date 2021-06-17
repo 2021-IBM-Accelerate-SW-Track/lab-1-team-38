@@ -109,6 +109,12 @@ function App(props) {
 
   function deleteTask(id) {
     //code for deleting tasks will go here, will need to call settasks() or something.
+    for(let i = 0; i < tasks.length; i++) {
+        if (tasks[i].id == id) {
+           tasks.pop(i);
+        }
+    }
+    
   }
 
   function toggleTaskCompleted(id) {
@@ -118,10 +124,15 @@ function App(props) {
     ranges through the todosData to find the matching id with the id to be completed;
     if finds task, then marks as complete; else maintains the original task completion state
     */
-    todosData.map(x => x.id == id ? x.completed = true : x.completed = x.completed);
+    todosData.map(x => x.id == id ? x.completed = !x.completed : x.completed = x.completed);
   }
-  
 
+  function updateTask(name) {
+      
+  }
+
+
+  
   //this uses the array.map function as required in the instrucitons
   const taskList = tasks.filter(FILTER_MAP[filter]).map(task => (
     <Todo
@@ -132,6 +143,7 @@ function App(props) {
       key={task.id}
       toggleTaskCompleted={toggleTaskCompleted}
       deleteTask={deleteTask}
+      updateTask={updateTask}
     />
   ));
   const filterList = FILTER_NAMES.map(name => (
