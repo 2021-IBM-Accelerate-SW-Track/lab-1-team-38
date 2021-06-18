@@ -33,6 +33,7 @@ import './App.css';
 
 
 import React, { useState } from "react";
+import moment from 'moment';
 import '@fontsource/roboto';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
@@ -99,7 +100,7 @@ function App(props) {
       { 
         id: uuid(), 
         text: name,
-        dateAndTime: new Date().toLocaleString(),
+        dateAndTime: new moment(Date()).format("MMM Mo LT"),
         completed: false
       }
     );
