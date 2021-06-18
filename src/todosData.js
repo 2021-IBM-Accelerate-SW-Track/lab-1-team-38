@@ -26,7 +26,7 @@ const todosData = [
         completed: false
     },
     {
-        id: 5,
+        id: uuid(),
         text: "Read React Docs",
         dateAndTime: new Date().toLocaleString(),
         completed: false
