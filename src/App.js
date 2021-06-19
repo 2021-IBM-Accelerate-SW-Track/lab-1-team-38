@@ -61,7 +61,10 @@ const FILTER_NAMES = Object.keys(FILTER_MAP);
 function App(props) {
   const [filter, setFilter] = useState('All');
   const [tasks, setTasks] = useState(props.tasks);
-  console.log(props.tasks);
+  if(tasks == null){
+    tasks = [...todosData]
+  }
+  console.log(tasks);
 
   function addTask(name) {
     //code for new task to go here, will need to call settasks() or something.
