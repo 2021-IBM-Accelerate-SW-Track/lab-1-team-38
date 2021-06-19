@@ -24,6 +24,7 @@ function Form(props) {
           variant="outlined"
           color="secondary"
           value={name}
+          data-testid="new-item-input"
           onChange={handleChange}
           margin='none'
           inputProps={{style: {fontSize: '2vh'}}}
@@ -34,7 +35,7 @@ function Form(props) {
         </Grid>
 
         <Grid item alignItems="stretch" style={{ display: "flex" }}>
-        <Button variant="contained" color="primary" type="submit" style={{ width: '10vw', fontSize: '2vh'}}>
+        <Button data-testid="new-item-button" datavariant="contained" color="primary" type="submit" style={{ width: '10vw', fontSize: '2vh'}}>
           add
         </Button>
         </Grid>
