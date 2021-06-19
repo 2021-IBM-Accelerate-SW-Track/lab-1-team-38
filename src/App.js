@@ -116,8 +116,6 @@ function App(props) {
     ranges through the todosData to find the matching id with the id to be completed;
     if finds task, then marks as complete; else maintains the original task completion state
     */
-    todosData.map(x => x.id == id ? x.completed = !x.completed : x.completed = x.completed);
-  function updateTask(name) {
     tasks.map(x => x.id == id ? x.completed = !x.completed : x.completed = x.completed);
   }
   
