@@ -48,7 +48,6 @@ import todosData from './todosData';
 import { ButtonBase, ListItemSecondaryAction } from '@material-ui/core';
 import { isDOMComponentElement } from 'react-dom/test-utils';
 import uuid from 'react-uuid'
-import arrayMove from "array-move";
 
 // this when called will assign and generate the filters.  to add more filters add a label with a following conditional
 const FILTER_MAP = {
@@ -62,6 +61,7 @@ const FILTER_NAMES = Object.keys(FILTER_MAP);
 function App(props) {
   const [filter, setFilter] = useState('All');
   const [tasks, setTasks] = useState(props.tasks);
+  console.log(tasks);
 
   function addTask(name) {
     //code for new task to go here, will need to call settasks() or something.
