@@ -62,7 +62,8 @@ function App(props) {
   const [filter, setFilter] = useState('All');
   const [tasks, setTasks] = useState(props.tasks);
   if(tasks == null){
-    tasks = [...todosData]
+    const defaultTasks = [...todosData]
+    setTasks(defaultTasks);
   }
   console.log(tasks);
 
