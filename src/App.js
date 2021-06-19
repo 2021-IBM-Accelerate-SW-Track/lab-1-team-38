@@ -122,7 +122,7 @@ function App(props) {
   //this uses the array.map function as required in the instrucitons
   var taskList;
   if (tasks == null){
-    taskList = tasks.map(task => (
+    taskList = todosData.map(task => (
       <Todo
         id={task.id}
         name={task.text}
