@@ -142,7 +142,22 @@ function App(props) {
 
   
   //this uses the array.map function as required in the instrucitons
-  const taskList = tasks.filter(FILTER_MAP[filter]).map(task => (
+  var taskList;
+  if (tasks == null){
+    taskList = todosData.map(task => (
+      <Todo
+        id={task.id}
+        name={task.text}
+        timestamp={task.dateAndTime}
+        completed={task.completed}
+        key={task.id}
+        toggleTaskCompleted={toggleTaskCompleted}
+        deleteTask={deleteTask}
+        updateTask={updateTask}
+      />
+    ));
+  }
+  else {taskList = tasks.filter(FILTER_MAP[filter]).map(task => (
     <Todo
       id={task.id}
       name={task.text}
@@ -153,7 +168,7 @@ function App(props) {
       deleteTask={deleteTask}
       updateTask={updateTask}
     />
-  ));
+  ));}
   const filterList = FILTER_NAMES.map(name => (
     <FilterButton
       key={name}
