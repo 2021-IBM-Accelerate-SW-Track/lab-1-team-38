@@ -188,7 +188,7 @@ function App(props) {
         <div className="filters btn-group stack-exception">
           
         </div>
-        <h2 id="list-heading">put size of task list here</h2> 
+        <h2 id="list-heading"> Size: {taskList.length}</h2> 
           {/* this needs to be in material.ui typography */}
           {/* this should also be left justified list and should somehow be implemented in material ui*/}
         <ul
