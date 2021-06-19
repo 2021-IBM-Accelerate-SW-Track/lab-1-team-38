@@ -1,6 +1,7 @@
 import uuid from "react-uuid"
 import moment from "moment"
-
+const todosData = []
+/*
 const todosData = [
     {
         id: uuid(),
@@ -33,5 +34,6 @@ const todosData = [
         completed: false
     }
 ]
+*/
 
 export default todosData
