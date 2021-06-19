@@ -9,7 +9,7 @@ import EditIcon from '@material-ui/icons/Edit';
 export default function Todo(props) {
   return (
     <li className="todo stack-small">
-      <Grid container fullWidth='true' spacing={1} alignItems="center">
+      <Grid container fullWidth='true' spacing={1} alignItems='center'>
         <Grid item>
         <Checkbox
           id={props.id}
@@ -27,27 +27,31 @@ export default function Todo(props) {
         
         </Grid>
 
-        <Grid item justify ="center" alignItems="stretch" style={{ display: "flex" }}>
-          <Typography className="todo-timestamp" variant="h5" htmlFor={props.id}>
-          {props.timestamp}
-          </Typography> 
-          
+        <Grid item alignItems="stretch" style={{ display: "flex" }}>
+          <IconButton
+            variant="contained" color="red"
+            onClick={() => props.updateTask(props.name)}
+          >
+            <EditIcon fontSize="large" /> <span className="visually-hidden">{props.name}</span>
+          </IconButton>
+          <IconButton
+            variant="contained" color="red"
+            onClick={() => props.deleteTask(props.id)}
+          >
+            <DeleteIcon fontSize="large" /> <span className="visually-hidden">{props.name}</span>
+          </IconButton>
         </Grid>
 
-        <Grid item alignItems="stretch" style={{ display: "flex" }}>
-        <IconButton
-          variant="contained" color="red"
-          onClick={() => props.updateTask(props.name)}
-        >
-          <EditIcon fontSize="large" /> <span className="visually-hidden">{props.name}</span>
-        </IconButton>
-        <IconButton
-          variant="contained" color="red"
-          onClick={() => props.deleteTask(props.id)}
-        >
-          <DeleteIcon fontSize="large" /> <span className="visually-hidden">{props.name}</span>
-        </IconButton>
+        <Grid container alignItems="center" >
+
+          <Grid item margin="left" alignItems="stretch" style={{ marginLeft: 45}}>
+            <Typography className="todo-timestamp" variant="h5" htmlFor={props.id}>
+            {props.timestamp}
+            </Typography> 
+          </Grid>    
+           
         </Grid>
+
       </Grid>
     </li>
   );
