@@ -37,9 +37,10 @@ import FilterButton from "./component/FilterButton";
 import Todo from "./component/Todo";
 import { BluetoothConnectedRounded, Code, Description, Details, HelpRounded, NearMeRounded } from '@material-ui/icons';
 import todosData from './todosData';
-import { ButtonBase, ListItemSecondaryAction } from '@material-ui/core';
+import { ButtonBase, Input, ListItemSecondaryAction, TextField } from '@material-ui/core';
 import { isDOMComponentElement } from 'react-dom/test-utils';
 import uuid from 'react-uuid'
+
 
 // this when called will assign and generate the filters.  to add more filters add a label with a following conditional
 const FILTER_MAP = {
@@ -118,6 +119,7 @@ function App(props) {
     */
     tasks.map(x => x.id == id ? x.completed = !x.completed : x.completed = x.completed);
   }
+
   
   //this uses the array.map function as required in the instrucitons
   var taskList;
@@ -144,7 +146,11 @@ function App(props) {
       key={task.id}
       toggleTaskCompleted={toggleTaskCompleted}
       deleteTask={deleteTask}
-      updateTask={updateTask}
+      setTasks = {setTasks}
+      isEditing = {task.isEditing}
+      placeholder = {task.placeholder}
+      tasks = {tasks}
+
     />
   ));}
   const filterList = FILTER_NAMES.map(name => (
