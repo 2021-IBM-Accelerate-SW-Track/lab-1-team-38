@@ -14,10 +14,7 @@ import './App.css';
 
 
 // What is left to is do:
-// - display date and time of addition
-// - no dupe items validation
 // - update list items
-// - implement the deleting of items
 // - clean up some spaces where items are not using material ui and make the formatting cleaner 
 // - just clean up some of the UI and Code.
 // - cleanup import statements
@@ -27,12 +24,8 @@ import './App.css';
 // - dropdown item per list item to show Description, and Details
 // - more complicated add form to accomdate more Details.
 
-// What is already done:
-//   - displaying items
-//  - implementing filter selection
-
-
 import React, { useState } from "react";
+import moment from 'moment';
 import '@fontsource/roboto';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
@@ -47,7 +40,6 @@ import todosData from './todosData';
 import { ButtonBase, Input, ListItemSecondaryAction, TextField } from '@material-ui/core';
 import { isDOMComponentElement } from 'react-dom/test-utils';
 import uuid from 'react-uuid'
-import arrayMove from "array-move";
 
 
 // this when called will assign and generate the filters.  to add more filters add a label with a following conditional
@@ -62,6 +54,11 @@ const FILTER_NAMES = Object.keys(FILTER_MAP);
 function App(props) {
   const [filter, setFilter] = useState('All');
   const [tasks, setTasks] = useState(props.tasks);
+  if(tasks == null){
+    const defaultTasks = [...todosData]
+    setTasks(defaultTasks);
+  }
+  console.log(tasks);
 
   function addTask(name) {
     //code for new task to go here, will need to call settasks() or something.
@@ -70,28 +67,17 @@ function App(props) {
     */
    if(name.length <= 0){
       return(
-        <Alert severity="error">Error: Trying to enter empty string as a task</Alert>
-      );
-    }
+         alert("Error: Please enter a full string")
+      ); 
+   }
 
     for (let i = 0; i < tasks.length; i++) {
       if (tasks[i].text === name) {
-        return (
-          <Alert severity="error">
-            This task already exists. Please enter a new task.
-          </Alert>
-        )
+        return( 
+          alert("Error: This task already exists. Please enter a new task")
+        ); 
       }
     }
-
-  /*
-  Repeated task input check here
-  */
- if(todosData.find(t => t.name === name)) {
-      return(
-        <Alert severity="error">Error: Trying to enter current task as new task</Alert>
-      );
- }
 
   /*
   After checking if string is empty and if the task in repeated, then can push onto list
@@ -100,16 +86,15 @@ function App(props) {
       { 
         id: uuid(), 
         text: name,
-        dateAndTime: new Date().toLocaleString(),
+        dateAndTime: new moment(Date()).format("MMM Mo LT"),
         completed: false
       }
     );
-    const newToDosData = [...todosData, newElem]; 
+    const newToDosData = [...tasks, newElem]; 
     setTasks(newToDosData);
   }
 
   function deleteTask(id) {
-    
     const newToDo = [...tasks];
 
     // Find and delete specified task
@@ -121,6 +106,10 @@ function App(props) {
     setTasks(newToDo);
   }
 
+  function updateTask(id) {
+
+  }
+
   function toggleTaskCompleted(id) {
     //code for marking items as complete will go here, should call settasks or something.
 
@@ -128,14 +117,27 @@ function App(props) {
     ranges through the todosData to find the matching id with the id to be completed;
     if finds task, then marks as complete; else maintains the original task completion state
     */
-    todosData.map(x => x.id == id ? x.completed = !x.completed : x.completed = x.completed);
+    tasks.map(x => x.id == id ? x.completed = !x.completed : x.completed = x.completed);
   }
-
-
 
   
   //this uses the array.map function as required in the instrucitons
-  const taskList = tasks.filter(FILTER_MAP[filter]).map(task => (
+  var taskList;
+  if (tasks == null){
+    taskList = todosData.map(task => (
+      <Todo
+        id={task.id}
+        name={task.text}
+        timestamp={task.dateAndTime}
+        completed={task.completed}
+        key={task.id}
+        toggleTaskCompleted={toggleTaskCompleted}
+        deleteTask={deleteTask}
+        updateTask={updateTask}
+      />
+    ));
+  }
+  else {taskList = tasks.filter(FILTER_MAP[filter]).map(task => (
     <Todo
       id={task.id}
       name={task.text}
@@ -150,7 +152,7 @@ function App(props) {
       tasks = {tasks}
 
     />
-  ));
+  ));}
   const filterList = FILTER_NAMES.map(name => (
     <FilterButton
       key={name}
@@ -185,14 +187,14 @@ function App(props) {
 
       <Box color="text.primary" bgcolor="rgba(0,0,10,0.2)" p={4} boxShadow={3} borderRadius={16}style={{ width: '70vw' }} >
         <Typography variant="h2" component="h3" margin = 'dense'>
-          Group 38 ToDo list Maker
+          Group 38 To Do List 
         </Typography>
         
         <Form addTask={addTask} />
         <div className="filters btn-group stack-exception">
           
         </div>
-        <h2 id="list-heading">put size of task list here</h2> 
+        <h2 id="list-heading"> Size: {taskList.length}</h2> 
           {/* this needs to be in material.ui typography */}
           {/* this should also be left justified list and should somehow be implemented in material ui*/}
         <ul
@@ -206,5 +208,6 @@ function App(props) {
     </Grid>
   );
 }
+
 
 export default App;
