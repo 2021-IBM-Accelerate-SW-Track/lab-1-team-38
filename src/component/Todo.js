@@ -100,21 +100,6 @@ export default function Todo(props) {
         
         </Grid>
 
-        <Grid item alignItems="stretch" style={{ display: "flex" }}>
-          <IconButton
-            variant="contained" color="red"
-            onClick={() => props.updateTask(props.name)}
-          >
-            <EditIcon fontSize="large" /> <span className="visually-hidden">{props.name}</span>
-          </IconButton>
-          <IconButton
-            variant="contained" color="red"
-            onClick={() => props.deleteTask(props.id)}
-          >
-            <DeleteIcon fontSize="large" /> <span className="visually-hidden">{props.name}</span>
-          </IconButton>
-        </Grid>
-
         {/* edit button */}
         <Grid item alignItems="stretch" style={{ display: "flex" }}>
 
@@ -137,7 +122,7 @@ export default function Todo(props) {
         >
           <DeleteIcon fontSize="large" /> <span className="visually-hidden">{props.name}</span>
         </IconButton>
-        
+        </Grid>
 
         <Grid container alignItems="center" >
 
