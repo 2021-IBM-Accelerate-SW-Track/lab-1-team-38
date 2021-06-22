@@ -173,7 +173,12 @@ export default function Todo(props) {
     for (let i = 0; i < newToDo.length; i++) {
         if (newToDo[i].id == id) {
             for (let j = 0; j < newToDo.length; j++) {
-              if (newToDo[j].text.toLowerCase() == newToDo[i].placeholder.toLowerCase()) {
+              //make all tasks only have maximum one space inbetween and all lowercase for data validation
+              let newTodoTextFormat = newToDo[j].text.toLowerCase();
+              newTodoTextFormat = newTodoTextFormat.replace(/[\n\r\s\t]+/g, ' ').trim()
+              let placeholderTaskFormat = newToDo[i].placeholder.toLowerCase();
+              placeholderTaskFormat = placeholderTaskFormat.replace(/[\n\r\s\t]+/g, ' ').trim()
+              if (newTodoTextFormat == placeholderTaskFormat) {
                 return( 
                   alert("Error: This task already exists. Please enter a new task")
                 ); 
