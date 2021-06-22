@@ -72,11 +72,20 @@ function App(props) {
    }
 
     for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].text.toLowerCase() === name.toLowerCase()) {
+      //make all tasks only have maximum one space inbetween and all lowercase for data validation
+      let taskFormat = tasks[i].text.toLowerCase();
+      taskFormat = taskFormat.replace(/  +/g, ' '); 
+
+      let nameTaskFormat = name.toLowerCase();
+      nameTaskFormat = nameTaskFormat.replace(/  +/g, ' ');
+
+      if (taskFormat === nameTaskFormat) {
         return( 
           alert("Error: This task already exists. Please enter a new task")
         ); 
       }
+
+
     }
 
   /*
