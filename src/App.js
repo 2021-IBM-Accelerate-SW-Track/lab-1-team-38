@@ -71,7 +71,7 @@ function App(props) {
    }
 
     for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].text === name) {
+      if (tasks[i].text.toLowerCase() === name.toLowerCase()) {
         return( 
           alert("Error: This task already exists. Please enter a new task")
         ); 
