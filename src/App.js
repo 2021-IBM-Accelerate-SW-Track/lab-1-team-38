@@ -74,12 +74,10 @@ function App(props) {
     for (let i = 0; i < tasks.length; i++) {
       //make all tasks only have maximum one space inbetween and all lowercase for data validation
       let taskFormat = tasks[i].text.toLowerCase();
-      taskFormat = taskFormat.replace(/  +/g, ' '); 
-      taskFormat = taskFormat.trim();
+      taskFormat = taskFormat.replace(/[\n\r\s\t]+/g, ' ').trim();
 
       let nameTaskFormat = name.toLowerCase();
-      nameTaskFormat = nameTaskFormat.replace(/  +/g, ' ');
-      nameTaskFormat = nameTaskFormat.trim();
+      nameTaskFormat = nameTaskFormat.replace(/[\n\r\s\t]+/g, ' ').trim();
       if (taskFormat === nameTaskFormat) {
         return( 
           alert("Error: This task already exists. Please enter a new task")
