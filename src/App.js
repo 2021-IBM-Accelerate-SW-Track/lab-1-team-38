@@ -86,7 +86,7 @@ function App(props) {
       { 
         id: uuid(), 
         text: name,
-        dateAndTime: new moment(Date()).format("MMM Mo LT"),
+        dateAndTime: new moment(Date()).format("MMM Do LT"),
         completed: false
       }
     );
