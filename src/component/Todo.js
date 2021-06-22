@@ -166,15 +166,22 @@ export default function Todo(props) {
   }
 
   // Set text equal to stored value (placeholder) once user wants to update
-  function updateValue() {
+ function updateValue() {
     const id = props.id
     const newToDo = [...props.tasks];
 
     for (let i = 0; i < newToDo.length; i++) {
         if (newToDo[i].id == id) {
+            for (let j = 0; i < newToDo.length; j++) {
+              if (newToDo[j].text.toLowerCase() == newToDo[i].placeholder.toLowerCase()) {
+                return( 
+                  alert("Error: This task already exists. Please enter a new task")
+                ); 
+              }
+            }
             newToDo[i].text = newToDo[i].placeholder
             newToDo[i].isEditing = false
-        }
+        } 
     }
     props.setTasks(newToDo);
 }
